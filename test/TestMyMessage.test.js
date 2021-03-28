@@ -1,0 +1,1 @@
+var MyMessage = artifacts.require('MyMessage');
