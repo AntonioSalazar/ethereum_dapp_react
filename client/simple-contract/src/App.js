@@ -15,14 +15,15 @@ const App = () => {
 
   const [currentAccount, setCurrentAccount ] = useState('');
   const [ networkId, setNetworkdId] = useState(0);
-  const checkWeb3Provider = async() => {
-      let web3 = new Web3(Web3.givenProvider);
 
-      if (window.ethereum) {
-        // use MetaMask's provider
-        web3 = new Web3(window.ethereum);
+  const checkWeb3Provider = async() => {
+    
+    if (window.ethereum) {
+        // let web3 = new Web3(window.ethereum);
+        let web3 = new Web3(Web3.givenProvider)
+
         await window.ethereum.request({method: 'eth_requestAccounts'}); // get permission to access accounts
-        const contractAddress = '0xf6e09b77560702d07472889472ab972735e699f6';
+        const contractAddress = '0xf6e09b77560702d07472889472ab972735e699f6'; //Deployed to the rinkeby test network
         const myMessageContract = new web3.eth.Contract(myMessageABI, contractAddress);
         
         //Set to the currentAccount state whatever account the user is using at the moment he loads the page
@@ -45,7 +46,7 @@ const App = () => {
       } else {
         console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live",);
         // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-        web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"),);
+        let web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"),);
       }
   }
 
