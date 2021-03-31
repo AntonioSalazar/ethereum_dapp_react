@@ -4,6 +4,7 @@ import { Web3Context } from "../context/Web3Provider";
 
 const Form = () => {
   const [formMessage, setFormMessage] = useState("");
+  const [getMessage, setGetMessage] = useState("");
   const [error, setError] = useState(false);
 
   const { currentAccount, messageContract } = useContext(Web3Context);
@@ -21,11 +22,17 @@ const Form = () => {
     const result = await messageContract.methods
       .setMessage(formMessage)
       .send({ from: currentAccount, gas });
-    console.log(result);
 
     e.target.reset();
     setError(false);
     setFormMessage("");
+  };
+
+  const handleGet = async (e) => {
+    e.preventDefault();
+
+    const result = await messageContract.methods.getMessage().call();
+    setGetMessage(result);
   };
 
   return (
@@ -45,6 +52,19 @@ const Form = () => {
           Set Message
         </button>
       </form>
+      <br />
+      <h3>
+        Click on the below button to see the message you sent to the Rinkeby
+        testnet
+      </h3>
+      <button
+        type="button"
+        onClick={handleGet}
+        className="btn btn-primary btn-block"
+      >
+        Get Message
+      </button>
+      <p>{getMessage}</p>
     </div>
   );
 };

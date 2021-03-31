@@ -38,7 +38,7 @@ const Web3Provider = props => {
             //Detect metamask network ID change
             window.ethereum.on('networkChanged', function(networkId){
               // console.log('networkChanged',networkId);
-              setCurrentNetworkID(networkId)
+              setCurrentNetworkID(parseInt(networkId));
             });
           } else {
             console.warn("No web3 detected. Falling back to http://127.0.0.1:9545. You should remove this fallback when you deploy live",);
@@ -66,6 +66,7 @@ const Web3Provider = props => {
 
     useEffect(() => {
       showAlert()
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentNetworkID])
 
     return (

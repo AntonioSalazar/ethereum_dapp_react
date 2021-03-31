@@ -8,6 +8,7 @@ const MessageProvider = props => {
     return (
         <MessageContext.Provider
             value={{
+                message,
                 setMessage
             }}
         >
