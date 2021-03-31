@@ -24,6 +24,13 @@ const App = () => {
         await window.ethereum.request({method: 'eth_requestAccounts'}); // get permission to access accounts
         const contractAddress = '0xf6e09b77560702d07472889472ab972735e699f6';
         const myMessageContract = new web3.eth.Contract(myMessageABI, contractAddress);
+        
+        //Set to the currentAccount state whatever account the user is using at the moment he loads the page
+        const accounts = await web3.eth.getAccounts();
+        setCurrentAccount(accounts[0]);
+        //Set to networkdId the ID of the network the user has in use in Metamask
+        let currentNetworkID = await web3.eth.net.getId();
+        setNetworkdId(currentNetworkID)
 
         //Detect metamask account change
         window.ethereum.on('accountsChanged', function (accounts) {
