@@ -4,19 +4,27 @@ import { Web3Context } from "../context/Web3Provider";
 
 const Form = () => {
   const [formMessage, setFormMessage] = useState("");
+  const [error, setError] = useState(false);
 
-  const { currentAccount, contract } = useContext(Web3Context);
-  console.log(contract, "from form");
+  const { currentAccount, messageContract } = useContext(Web3Context);
 
-  const guardarDatos = (e) => {
+  const handleSet = async (e) => {
     e.preventDefault();
 
     if (!formMessage.trim()) {
-      console.log("Esta vacio el mensaje");
+      setError(true);
       return;
     }
+    const gas = await messageContract.methods
+      .setMessage(formMessage)
+      .estimateGas();
+    const result = await messageContract.methods
+      .setMessage(formMessage)
+      .send({ from: currentAccount, gas });
+    console.log(result);
 
     e.target.reset();
+    setError(false);
     setFormMessage("");
   };
 
@@ -24,7 +32,7 @@ const Form = () => {
     <div className="form-div">
       <p>You are currently connected with the {currentAccount} account</p>
       <h2>Formulario para setMessage</h2>
-      <form onSubmit={guardarDatos}>
+      <form onSubmit={handleSet}>
         <input
           type="text"
           placeholder="Set Message"
@@ -32,7 +40,7 @@ const Form = () => {
           onChange={(e) => setFormMessage(e.target.value)}
           value={formMessage}
         />
-
+        {error ? <p>Agrega un mensaje!</p> : null}
         <button className="btn btn-primary btn-block" type="submit">
           Set Message
         </button>

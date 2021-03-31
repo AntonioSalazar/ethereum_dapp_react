@@ -9,7 +9,7 @@ import App from './App'
 const options = {
   position: positions.BOTTOM_CENTER,
   timeout: 5000,
-  offset: '30px',
+  offset: '10px',
   transition: transitions.SCALE
 }
 

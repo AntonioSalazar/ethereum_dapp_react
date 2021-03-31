@@ -10,7 +10,7 @@ const Web3Provider = props => {
 
     const [currentAccount, setCurrentAccount ] = useState('');
     const [currentNetworkID, setCurrentNetworkID] = useState(0);
-    const [ contract, setContract] = useState({});
+    const [ messageContract, setMessageContract] = useState({});
     const alert = useAlert();
 
     const checkWeb3Provider = async () => {
@@ -21,7 +21,7 @@ const Web3Provider = props => {
             await window.ethereum.request({method: 'eth_requestAccounts'}); // get permission to access accounts
             const contractAddress = '0xf6e09b77560702d07472889472ab972735e699f6'; //Deployed to the rinkeby test network
             const myMessageContract = new web3.eth.Contract(myMessageABI, contractAddress);
-            setContract(myMessageContract)
+            setMessageContract(myMessageContract)
             
             //Set to the currentAccount state whatever account the user is using at the moment he loads the page
             const accounts = await web3.eth.getAccounts();
@@ -72,7 +72,7 @@ const Web3Provider = props => {
         <Web3Context.Provider
             value={{
                 currentAccount,
-                contract
+                messageContract
             }}
         >
         {props.children}    
