@@ -6,6 +6,8 @@ const Form = () => {
   const [formMessage, setFormMessage] = useState("");
   const [getMessage, setGetMessage] = useState("");
   const [error, setError] = useState(false);
+  const [txResult, setTxResult] = useState({});
+  console.log(txResult, "tx result");
 
   const { currentAccount, messageContract } = useContext(Web3Context);
 
@@ -22,10 +24,10 @@ const Form = () => {
     const result = await messageContract.methods
       .setMessage(formMessage)
       .send({ from: currentAccount, gas });
-
     e.target.reset();
     setError(false);
     setFormMessage("");
+    setTxResult(result);
   };
 
   const handleGet = async (e) => {
@@ -38,8 +40,8 @@ const Form = () => {
   return (
     <div className="form-div">
       <p>You are currently connected with the {currentAccount} account</p>
-      <h2>Formulario para setMessage</h2>
-      <form onSubmit={handleSet}>
+      <h2>Send a message to the Rinkeby test network!</h2>
+      <form onSubmit={handleSet} className="form-set-message">
         <input
           type="text"
           placeholder="Set Message"
@@ -47,7 +49,7 @@ const Form = () => {
           onChange={(e) => setFormMessage(e.target.value)}
           value={formMessage}
         />
-        {error ? <p>Agrega un mensaje!</p> : null}
+        {error ? <p className="error">You need to add a message!</p> : null}
         <button className="btn btn-primary btn-block" type="submit">
           Set Message
         </button>
@@ -64,7 +66,25 @@ const Form = () => {
       >
         Get Message
       </button>
-      <p>{getMessage}</p>
+      <input
+        type="text"
+        className="get-message"
+        placeholder={getMessage ? getMessage : "Your message will show here!"}
+        disabled="disabled"
+      />
+      <br />
+      {getMessage
+        ? [
+            <p>
+              You can also track this transaction in
+              <a
+                href={`https://rinkeby.etherscan.io/tx/${txResult.transactionHash}`}
+              >
+                here
+              </a>
+            </p>,
+          ]
+        : null}
     </div>
   );
 };
