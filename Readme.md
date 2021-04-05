@@ -23,3 +23,20 @@ This app will detect two very important changes :exclamation: :exclamation:
 - If the user changes his metamask account and if he changes to another network other than Rinkeby
 
 ![](public/on-load.PNG)
+
+If the user sets metamask to use another network an error message will be shown
+
+![](public/on-net-change.PNG)
+
+After sending a message metamask will open asking for the user to check the gas cost and to confirm
+
+![](public/send-tx.PNG)
+
+![](public/tx-confirm.PNG)
+
+Finally the user will be able to get the message from the Rinkeny test network,
+:exclamation: as this is a read only function in the smart contract it will not create any cost :exclamation:
+
+![](public/get-msg.PNG)
+
+<br /> Made by Antonio Salazar. 😘 (to be published as a Medium article)
