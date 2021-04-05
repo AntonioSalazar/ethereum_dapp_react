@@ -18,5 +18,8 @@ react v17.0.2
 
 ### React Hooks have been used, Context API has been used for state management
 
-The app
-![](public/on-load.png)
+This app will detect two very important changes :exclamation: :exclamation:
+
+- If the user changes his metamask account and if he changes to another network other than Rinkeby
+
+![](public/on-load.PNG)
