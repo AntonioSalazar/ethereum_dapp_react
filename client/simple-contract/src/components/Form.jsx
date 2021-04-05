@@ -7,7 +7,6 @@ const Form = () => {
   const [getMessage, setGetMessage] = useState("");
   const [error, setError] = useState(false);
   const [txResult, setTxResult] = useState({});
-  console.log(txResult, "tx result");
 
   const { currentAccount, messageContract } = useContext(Web3Context);
 
@@ -71,6 +70,7 @@ const Form = () => {
         className="get-message"
         placeholder={getMessage ? getMessage : "Your message will show here!"}
         disabled="disabled"
+        key={getMessage.transactionHash}
       />
       <br />
       {getMessage
@@ -79,6 +79,7 @@ const Form = () => {
               You can also track this transaction in
               <a
                 href={`https://rinkeby.etherscan.io/tx/${txResult.transactionHash}`}
+                target="_blank"
               >
                 here
               </a>
