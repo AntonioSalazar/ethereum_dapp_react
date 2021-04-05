@@ -80,6 +80,7 @@ const Form = () => {
               <a
                 href={`https://rinkeby.etherscan.io/tx/${txResult.transactionHash}`}
                 target="_blank"
+                rel="noreferrer"
               >
                 here
               </a>
