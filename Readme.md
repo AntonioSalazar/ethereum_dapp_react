@@ -28,7 +28,7 @@ If the user sets metamask to use another network an error message will be shown
 
 ![](public/on-net-change.PNG)
 
-After sending a message metamask will open asking for the user to check the gas cost and to confirm
+After sending a message, metamask will open asking for the user to check the gas cost and to confirm
 
 ![](public/send-tx.PNG)
 
