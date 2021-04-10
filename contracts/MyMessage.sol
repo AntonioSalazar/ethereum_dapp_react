@@ -8,7 +8,9 @@ contract MyMessage{
 
     function setMessage(string memory _message) public returns(string memory){
         myMessage = _message;
+        emit MessageSent(myMessage);
         return myMessage;
+
     }
 
     function getMessage() public view returns (string memory){
