@@ -22,6 +22,7 @@ const Web3Provider = props => {
             const contractAddress = '0xf6e09b77560702d07472889472ab972735e699f6'; //Deployed to the rinkeby test network
             const myMessageContract = new web3.eth.Contract(myMessageABI, contractAddress);
             setMessageContract(myMessageContract)
+            console.log(myMessageContract.events.MessageSent((err, res) => console.log(res)));
             
             //Set to the currentAccount state whatever account the user is using at the moment he loads the page
             const accounts = await web3.eth.getAccounts();
