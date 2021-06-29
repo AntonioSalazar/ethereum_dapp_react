@@ -37,8 +37,8 @@ const Web3Provider = props => {
               setCurrentAccount(accounts[0])
             });
             //Detect metamask network ID change
-            window.ethereum.on('networkChanged', function(networkId){
-              // console.log('networkChanged',networkId);
+            window.ethereum.on('chainChanged', function(networkId){
+              // console.log('chainChanged',networkId);
               setCurrentNetworkID(parseInt(networkId));
             });
           } else {
